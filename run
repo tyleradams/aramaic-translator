@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+gunicorn -w 1 --enable-stdio-inheritance --env GIT_SHA="$(git rev-parse HEAD)" app:app

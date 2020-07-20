@@ -1,0 +1,5 @@
+*.pyc
+*.swp
+data.json
+
+**/node_modules
