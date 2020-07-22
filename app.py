@@ -181,6 +181,10 @@ def translate():
         "translations": translations,
     }
 
+@app.route("/", methods=["GET"])
+def homepage():
+    return flask.redirect("/static/dashboard.html")
+
 
 if __name__ == "__main__":
     app.run()
