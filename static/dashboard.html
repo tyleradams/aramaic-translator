@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Fullstack Template">
     <meta name="author" content="Tyler Adams">
-    <title>Dashboard</title>
+    <title>Aramaic Translator</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/dashboard/">
 
@@ -31,29 +31,19 @@
 
 <div class="container-fluid">
   <div class="row">
-    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-      <div class="sidebar-sticky">
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link active" href="#">
-              Homepage<span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/static/settings.html">
-              Settings
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-      <button class="btn btn-secondary float-right js-click-logout">
-        Logout
-      </button>
       <div class="homepage">
-        <h1 class="homepage-title"></h1>
+        <h1 class="homepage-title">Aramaic Translator</h1>
+        <div class="translator-input--container">
+          <form>
+            <input type="text" class="translation-input--text">
+            <input type="button" value="Translate" class="translation-input--translate-button js-click--search-results">
+          </form>
+        </div>
+        <div class="translator-output--container">
+          <table class="table table-striped table-sm translator-output--results-table">
+          </table>
+        </div>
       </div>
     </main>
   </div>

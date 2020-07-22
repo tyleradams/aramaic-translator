@@ -5,12 +5,18 @@ import os
 import random
 
 import flask
+import translator
 
 # pylint:disable=invalid-name
 app = flask.Flask(__name__)
 app.debug = True
 
 TOKEN_CHARS = "ABCDEFGHJKMNPQRSTUVWXYZ0123456789"
+
+DICTIONARY = None
+with open("dictionary.json") as f:
+    DICTIONARY= json.load(f)
+
 
 class ApplicationException(Exception):
     pass
@@ -162,6 +168,19 @@ def update_password():
         return {}
     else:
         return flask_error("INCORRECT_OLD_PASSWORD")
+
+@app.route("/translate", methods=["POST"])
+def translate():
+    body = flask.request.get_json()
+    word = body["text"]
+    print("DEBUG:word:{}".format(word))
+    # need to reverse word as translator expects L-R hebrew but the user inputs R-L hebrew
+    translations = [w.as_grammar(word) for w in translator.generate_words(DICTIONARY, word, True)]
+    return {
+        "word": word,
+        "translations": translations,
+    }
+
 
 if __name__ == "__main__":
     app.run()

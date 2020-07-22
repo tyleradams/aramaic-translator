@@ -73,3 +73,12 @@ $('.js-click-user-sign-in').on('click', () => {
     password: $(".user-sign-in--input-password").val(),
   });
 });
+
+$('.js-click--search-results').on('click', () => {
+  postHTTPJSON("/translate", {
+    text: $(".translation-input--text").val()
+  }).then(translation => translation.jsonBody)
+  .then(translation => {
+    renderTranslation(translation);
+  });
+});

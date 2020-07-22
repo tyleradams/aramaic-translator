@@ -1,36 +1,23 @@
-async function renderUser(user) {
-  GLOBALS.user = user;
-}
+const TRANSLATION_KEYS = [
+"word",
+"root",
+"meaning",
+"language",
+];
 
-function parseUser() {
-  const user = GLOBALS.user;
-  return user;
+function tableDataFromTranslations(translations) {
+  return {
+    headers: TRANSLATION_KEYS.map(k => {
+      return {html: k};
+    }),
+    rows: translations.map(t =>
+      TRANSLATION_KEYS.map(k => {
+        return {html: t[k], attr: [] };
+      })
+    )
+  };
 }
-
-async function updatePassword() {
-  await updateUserPassword($(".user-old-password").val(), $(".user-new-password").val());
+function renderTranslation(translation) {
+  const tableData = tableDataFromTranslations(translation.translations);
+  makeTable($(".translator-output--results-table"),tableData);
 }
-
-function showHideNewPassword() {
-  const element = $(".user-new-password");
-  if (element.attr("type") === "text") {
-    element.attr("type", "password");
-  } else if (element.attr("type") === "password") {
-    element.attr("type", "text");
-  // This code shouldn't be reached, if it does, we decided to pick the safe route
-  // by hiding the password
-  } else {
-    element.attr("type", "password");
-  }
-}
-
-async function setup() {
-  const cookie = parseCookie(document.cookie);
-  if (!('token' in cookie)) {
-    window.location.replace('/static/sign-in.html');
-  }
-  const user = await loadUser();
-  renderUser(user);
-}
-
-setup();
