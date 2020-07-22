@@ -1,18 +1,19 @@
-const TRANSLATION_KEYS = [
-"word",
-"root",
-"meaning",
-"language",
-];
+const TRANSLATION_KEYS = {
+  word: (a) => a.word,
+  root: (a) => a.root,
+  meaning: (a) => a.meaning,
+  conjugation: (a) => Object.values(a.conjugation).join(", "),
+  language: (a) => a.language,
+};
 
 function tableDataFromTranslations(translations) {
   return {
-    headers: TRANSLATION_KEYS.map(k => {
+    headers: Object.keys(TRANSLATION_KEYS).map(k => {
       return {html: k};
     }),
     rows: translations.map(t =>
-      TRANSLATION_KEYS.map(k => {
-        return {html: t[k], attr: [] };
+      Object.entries(TRANSLATION_KEYS).map(e => {
+        return {html: e[1](t), attr: [] };
       })
     )
   };
