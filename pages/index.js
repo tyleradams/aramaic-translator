@@ -5,13 +5,19 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      results: []
+      results: [],
+      inputText: "",
     }
     this.fetchResults = this.fetchResults.bind(this);
+    this.inputTextChange = this.inputTextChange.bind(this);
   }
 
   fetchResults() {
-    this.setState({results: this.state.results.concat([1])});
+    this.setState({results: this.state.results.concat([this.state.inputText])});
+  }
+
+  inputTextChange(e) {
+    this.setState({inputText: e.target.value});
   }
 
   render() {
@@ -27,14 +33,21 @@ class Home extends React.Component {
             Translate Aramaic
           </h1>
           <form>
-            <input type="text" className="translation-input--text"/>
-            <input type="button" value="Translate" className="translation-input--translate-button js-click--search-results↪ " onClick={this.fetchResults}/>
+            <input type="text" value={this.state.inputText} onChange={this.inputTextChange} className="translation-input--text"/>
+            <input type="button" value="Translate" className="translation-input--translate-button js-click--search-results" onClick={this.fetchResults}/>
           </form>
           <div className="translator-output--container">
             <table className="table table-striped table-sm translator-output--results-table">
+              <tr>
+                <th>
+                  word
+                </th>
+              </tr>
               {this.state.results.map((r) => {
                 return (
-                  <td>{r}</td>
+                  <tr>
+                    <td>{r}</td>
+                  </tr>
                 )
               })}
             </table>
