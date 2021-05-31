@@ -1,16 +1,15 @@
 {
-  "name": "fullstack-template",
-  "version": "1.0.0",
-  "description": "A financial fullstack-template",
-  "main": "index.js",
+  "name": "learn-starter",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
-  "author": "Tyler Adams",
-  "license": "MIT",
-  "devDependencies": {
-    "eslint": "^7.4.0",
-    "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-plugin-import": "^2.22.0"
+  "dependencies": {
+    "next": "^10.0.0",
+    "react": "17.0.1",
+    "react-dom": "17.0.1"
   }
 }
