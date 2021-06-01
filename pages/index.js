@@ -21,7 +21,7 @@ class Home extends React.Component {
         'Content-Type': 'application/json'
       }
     };
-    fetch(process.env.NEXT_PUBLIC_VERCEL_URL, body).then(r => r.json()).then(r => {
+    fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/translator`, body).then(r => r.json()).then(r => {
       this.setState({translationResults: r.words})
       console.log(r.words)
     })
@@ -61,6 +61,9 @@ class Home extends React.Component {
           <h1 className="title">
             Translate Aramaic
           </h1>
+          <h4>
+           {process.env.NEXT_PUBLIC_VERCEL_ENV}
+          </h4>
           <h4>
            {process.env.NEXT_PUBLIC_VERCEL_URL}
           </h4>

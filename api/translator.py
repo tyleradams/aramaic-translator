@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import click
 import json
 import sys
 import textdistance
@@ -34,7 +33,7 @@ DAGESHABLE_LETTERS = "שבגדוזטיךכלמנםףפצקרת"
 DEBUG = False
 
 DATA = []
-with open('data.json') as d:
+with open('api/data.json') as d:
     DATA = json.load(d)
 
 def finalize_word(word):
@@ -464,33 +463,3 @@ def translate(path):
         "word": word,
         "words": [w.as_dict() for w in generate_words(DATA, word, True)],
     })
-
-
-@click.command()
-@click.option("--debug/--no-debug", default=False)
-@click.option("--weak-match/--no-weak-match", default=False)
-@click.option("--load-jastrow/--no-load-jastrow", "load_jastrow", default=True)
-def main(debug, weak_match, load_jastrow):
-    global DEBUG
-    DEBUG = debug
-
-    input_words = json.load(sys.stdin)
-
-    data = json.load(open("data/data.json"))
-
-    if load_jastrow:
-        data += json.load(open("data/jastrow.json"))
-
-    output = []
-    for input_word in input_words:
-        if DEBUG:
-            print("DEBUG:INPUT_WORD:{}".format(input_word))
-        output.append({
-            "word": input_word,
-            "matches": [word.as_grammar(input_word) for word in generate_words(data, input_word, weak_match)]
-        })
-
-    print(json.dumps(output))
-
-if __name__ == "__main__":
-    main()
