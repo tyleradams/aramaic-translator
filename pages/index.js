@@ -61,12 +61,6 @@ class Home extends React.Component {
           <h1 className="title">
             Translate Aramaic
           </h1>
-          <h4>
-           {process.env.NEXT_PUBLIC_VERCEL_ENV}
-          </h4>
-          <h4>
-           {process.env.NEXT_PUBLIC_VERCEL_URL}
-          </h4>
           <form>
             <input type="text" value={this.state.inputText} onChange={this.inputTextChange} className="translation-input--text"/>
             <input type="button" value="Translate" className="translation-input--translate-button js-click--search-translationResults" onClick={this.fetchResults}/>
