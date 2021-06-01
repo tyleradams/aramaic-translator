@@ -63,7 +63,7 @@ class Home extends React.Component {
           </h1>
           <form>
             <input type="text" value={this.state.inputText} onChange={this.inputTextChange} className="translation-input--text"/>
-            <input type="button" value="Translate" className="translation-input--translate-button js-click--search-translationResults" onClick={this.fetchResults}/>
+            <input type="button" value="Translate" className="translation-input--translate-button" onClick={this.fetchResults}/>
           </form>
           <div className="translator-output--container">
             {this.state.translationResults.map((r,i) => {
