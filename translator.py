@@ -5,6 +5,16 @@ import json
 import sys
 import textdistance
 
+import flask
+import flask_cors
+
+app = flask.Flask(__name__)
+flask_cors.CORS(app, supports_credentials=True, origins=[
+    "http://localhost:3000",
+    "http://localhost:5000",
+])
+
+
 FINALIZEABLE_LETTERS = {
     "כ": "ך",
     "פ": "ף",
@@ -14,7 +24,7 @@ FINALIZEABLE_LETTERS = {
 }
 FINALIZED_LETTERS = { v: k for k,v in FINALIZEABLE_LETTERS.items() }
 
-PASSIVE_SWAP_LETTERS= {
+PASSIVE_SWAP_LETTERS = {
     "ז": "ד",
     "צ": "ט",
 }
@@ -22,6 +32,10 @@ PASSIVE_SWAP_LETTERS= {
 DAGESHABLE_LETTERS = "שבגדוזטיךכלמנםףפצקרת"
 
 DEBUG = False
+
+DATA = []
+with open('data.json') as d:
+    DATA = json.load(d)
 
 def finalize_word(word):
     if word[-1] in FINALIZEABLE_LETTERS:
@@ -279,6 +293,7 @@ def generate_nouns(data, input_word):
     for noun in nouns:
         words.append(Word({
             "type": "root",
+            "root-type": "noun",
             "root": noun["noun"],
             "meaning": noun["meaning"],
             "language": noun["language"],
@@ -345,6 +360,7 @@ def generate_adjectives(data, input_word):
     for adjective in adjectives:
         words.append(Word({
             "type": "root",
+            "root-type": "adjective",
             "root": adjective["adjective"],
             "meaning": adjective["meaning"],
             "language": adjective["language"],
@@ -362,6 +378,7 @@ def generate_misc(data, input_word):
     for misc in miscs:
         words.append(Word({
             "type": "root",
+            "root-type": "misc",
             "root": misc["misc"],
             "meaning": misc["meaning"],
             "language": misc["language"],
@@ -391,6 +408,7 @@ def generate_names(data, input_word):
     for name in names:
         words.append(Word({
             "type": "root",
+            "root-type": "noun",
             "root": name["name"],
             "meaning": name["meaning"],
             "language": name["language"],
@@ -436,6 +454,17 @@ def generate_words(data, input_word, weak_match=False):
 
     words = sorted(words, key=word_rank(input_word))
     return words
+
+@app.route('/', defaults={'path': ''}, methods=['GET', 'POST'])
+@app.route('/<path:path>', methods=['GET', 'POST'])
+def translate(path):
+    body = flask.request.get_json()
+    word = body["word"]
+    return json.dumps({
+        "word": word,
+        "words": [w.as_dict() for w in generate_words(DATA, word, True)],
+    })
+
 
 @click.command()
 @click.option("--debug/--no-debug", default=False)

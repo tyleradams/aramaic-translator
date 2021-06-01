@@ -5,19 +5,48 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      results: [],
+      translationResults: [],
       inputText: "",
     }
     this.fetchResults = this.fetchResults.bind(this);
     this.inputTextChange = this.inputTextChange.bind(this);
+    this.renderRule = this.renderRule.bind(this);
   }
 
   fetchResults() {
-    this.setState({results: this.state.results.concat([this.state.inputText])});
+    const body = {
+      method: 'POST',
+      body: JSON.stringify({ word: this.state.inputText }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch(process.env.NEXT_PUBLIC_VERCEL_URL, body).then(r => r.json()).then(r => {
+      this.setState({translationResults: r.words})
+      console.log(r.words)
+    })
   }
 
   inputTextChange(e) {
     this.setState({inputText: e.target.value});
+  }
+
+  renderRule(rule, key) {
+    if (typeof(rule[rule.type]) === "string") {
+      return (
+        <tr key={key}>
+          <td>{rule.type}</td>
+          <td>{rule[rule.type]}</td>
+        </tr>
+      )
+    } else {
+      return (
+        <tr key={key}>
+          <td>{rule.type}</td>
+          <td>{JSON.stringify(rule[rule.type])}</td>
+        </tr>
+      )
+    }
   }
 
   render() {
@@ -32,25 +61,33 @@ class Home extends React.Component {
           <h1 className="title">
             Translate Aramaic
           </h1>
+          <h4>
+           {process.env.NEXT_PUBLIC_VERCEL_URL}
+          </h4>
           <form>
             <input type="text" value={this.state.inputText} onChange={this.inputTextChange} className="translation-input--text"/>
-            <input type="button" value="Translate" className="translation-input--translate-button js-click--search-results" onClick={this.fetchResults}/>
+            <input type="button" value="Translate" className="translation-input--translate-button js-click--search-translationResults" onClick={this.fetchResults}/>
           </form>
           <div className="translator-output--container">
-            <table className="table table-striped table-sm translator-output--results-table">
-              <tr>
-                <th>
-                  word
-                </th>
-              </tr>
-              {this.state.results.map((r) => {
-                return (
+            {this.state.translationResults.map((r,i) => {
+              return (
+              <table key={i} className="table">
+                <thead>
+                  <tr><td>{r.word}</td></tr>
                   <tr>
-                    <td>{r}</td>
+                    <td>meaning</td>
+                    <td>{r.root.meaning}</td>
                   </tr>
-                )
-              })}
-            </table>
+                  <tr>
+                    <td>root-type</td>
+                    <td>{r.root["root-type"]}</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  {r.rules.map(this.renderRule)}
+                </tbody>
+              </table>
+            )})}
           </div>
 
 
