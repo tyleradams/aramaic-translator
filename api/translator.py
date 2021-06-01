@@ -10,7 +10,7 @@ import flask_cors
 app = flask.Flask(__name__)
 flask_cors.CORS(app, supports_credentials=True, origins=[
     "http://localhost:3000",
-    "http://localhost:5000",
+    "https://aramaic-translator.vercel.app/",
 ])
 
 

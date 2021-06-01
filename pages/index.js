@@ -21,7 +21,7 @@ class Home extends React.Component {
         'Content-Type': 'application/json'
       }
     };
-    fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/translator`, body).then(r => r.json()).then(r => {
+    fetch(`api/translator`, body).then(r => r.json()).then(r => {
       this.setState({translationResults: r.words})
       console.log(r.words)
     })
