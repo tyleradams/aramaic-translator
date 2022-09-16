@@ -18,7 +18,7 @@ class Home extends React.Component {
   fetchResults() {
     const body = {
       method: 'POST',
-      body: JSON.stringify({ word: this.state.inputText }),
+        body: JSON.stringify({ word: this.state.inputText, weak_match: this.state.weakMatch }),
       headers: {
         'Content-Type': 'application/json'
       }
