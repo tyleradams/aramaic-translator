@@ -7,9 +7,11 @@ class Home extends React.Component {
     this.state = {
       translationResults: [],
       inputText: "",
+      weakMatch: false,
     }
     this.fetchResults = this.fetchResults.bind(this);
     this.inputTextChange = this.inputTextChange.bind(this);
+    this.weakMatchChange = this.weakMatchChange.bind(this);
     this.renderRule = this.renderRule.bind(this);
   }
 
@@ -25,6 +27,10 @@ class Home extends React.Component {
       this.setState({translationResults: r.words})
       console.log(r.words)
     })
+  }
+
+  weakMatchChange(e) {
+    this.setState({weakMatch: !this.state.weakMatch});
   }
 
   inputTextChange(e) {
@@ -63,6 +69,7 @@ class Home extends React.Component {
           </h1>
           <form>
             <input type="text" value={this.state.inputText} onChange={this.inputTextChange} className="translation-input--text"/>
+            <input type="checkbox" value={this.state.weakMatch} onChange={this.weakMatchChange} className="translation-input--text"/>
             <input type="button" value="Translate" className="translation-input--translate-button" onClick={this.fetchResults}/>
           </form>
           <div className="translator-output--container">

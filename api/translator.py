@@ -459,7 +459,9 @@ def generate_words(data, input_word, weak_match=False):
 def translate(path):
     body = flask.request.get_json()
     word = body["word"]
+    weak_match = body["weak_match"]
+    print(f"translate {word}, {weak_match}")
     return json.dumps({
         "word": word,
-        "words": [w.as_dict() for w in generate_words(DATA, word, True)],
+        "words": [w.as_dict() for w in generate_words(DATA, word, weak_match)],
     })
