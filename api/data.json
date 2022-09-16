@@ -4477,6 +4477,15 @@
     "type": "prefix"
   },
   {
+    "language": "hebrew",
+    "meaning": "guard",
+    "root": "שמר",
+    "type": "root",
+    "weak-letters": [
+      0
+    ]
+  },
+{
     "language": "aramaic",
     "meaning": "go",
     "root": "אזל",
