@@ -4480,6 +4480,7 @@
     "language": "hebrew",
     "meaning": "guard",
     "root": "שמר",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": [
       0
@@ -4489,6 +4490,7 @@
     "language": "aramaic",
     "meaning": "go",
     "root": "אזל",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": [
       0
@@ -4498,6 +4500,7 @@
     "language": "aramaic",
     "meaning": "eat",
     "root": "אכל",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": [
       0
@@ -4507,6 +4510,7 @@
     "language": "aramaic",
     "meaning": "say",
     "root": "אמר",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": [
       0,
@@ -4517,6 +4521,7 @@
     "language": "aramaic",
     "meaning": "heal/cure",
     "root": "אסי",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": [
       0,
@@ -4527,6 +4532,7 @@
     "language": "aramaic",
     "meaning": "come",
     "root": "אתי",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": [
       0,
@@ -4537,6 +4543,7 @@
     "language": "aramaic",
     "meaning": "ask/request/want/require",
     "root": "בעי",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": [
       2
@@ -4546,6 +4553,7 @@
     "language": "aramaic",
     "meaning": "exile/reveal",
     "root": "גלי",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": [
       2
@@ -4555,6 +4563,7 @@
     "language": "aramaic",
     "meaning": "return",
     "root": "הדר",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": []
   },
@@ -4562,6 +4571,7 @@
     "language": "aramaic",
     "meaning": "be",
     "root": "הוי",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": []
   },
@@ -4569,6 +4579,7 @@
     "language": "aramaic",
     "meaning": "believe",
     "root": "הימנ",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": [
       1
@@ -4578,6 +4589,7 @@
     "language": "aramaic",
     "meaning": "buy",
     "root": "זבנ",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": []
   },
@@ -4585,6 +4597,7 @@
     "language": "aramaic",
     "meaning": "see",
     "root": "חזי",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": [
       2
@@ -4594,6 +4607,7 @@
     "language": "aramaic",
     "meaning": "know/learn",
     "root": "ידע",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": [
       0
@@ -4603,6 +4617,7 @@
     "language": "aramaic",
     "meaning": "learn",
     "root": "ילפ",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": [
       0
@@ -4612,6 +4627,7 @@
     "language": "aramaic",
     "meaning": "sit",
     "root": "יתב",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": [
       0
@@ -4621,6 +4637,7 @@
     "language": "aramaic",
     "meaning": "die",
     "root": "מות",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": [
       1
@@ -4630,6 +4647,7 @@
     "language": "aramaic",
     "meaning": "Broil",
     "root": "מלח",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": []
   },
@@ -4637,6 +4655,7 @@
     "language": "aramaic",
     "meaning": "do/make",
     "root": "נבד",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": []
   },
@@ -4644,6 +4663,7 @@
     "language": "aramaic",
     "meaning": "give",
     "root": "נהב",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": [
       0
@@ -4653,6 +4673,7 @@
     "language": "aramaic",
     "meaning": "rest",
     "root": "נוח",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": [
       1
@@ -4662,6 +4683,7 @@
     "language": "aramaic",
     "meaning": "go down",
     "root": "נחת",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": [
       0
@@ -4671,6 +4693,7 @@
     "language": "aramaic",
     "meaning": "go out",
     "root": "נפק",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": [
       0
@@ -4680,6 +4703,7 @@
     "language": "aramaic",
     "meaning": "go up",
     "root": "סלק",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": [
       1
@@ -4689,6 +4713,7 @@
     "language": "aramaic",
     "meaning": "enter",
     "root": "עלל",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": [
       1
@@ -4698,6 +4723,7 @@
     "language": "aramaic",
     "meaning": "divide",
     "root": "פלג",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": []
   },
@@ -4705,6 +4731,7 @@
     "language": "aramaic",
     "meaning": "necessity",
     "root": "צרכ",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": []
   },
@@ -4712,6 +4739,7 @@
     "language": "aramaic",
     "meaning": "To betrothe",
     "root": "קדש",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": []
   },
@@ -4719,6 +4747,7 @@
     "language": "aramaic",
     "meaning": "stand/get up/rise",
     "root": "קומ",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": [
       1,
@@ -4729,6 +4758,7 @@
     "language": "aramaic",
     "meaning": "To Tie",
     "root": "קטר",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": []
   },
@@ -4736,6 +4766,7 @@
     "language": "aramaic",
     "meaning": "ask/borrow",
     "root": "שאל",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": [
       1
@@ -4745,6 +4776,7 @@
     "language": "aramaic",
     "meaning": "drink",
     "root": "שתי",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": []
   },
@@ -4752,6 +4784,7 @@
     "language": "aramaic",
     "meaning": "return",
     "root": "תוב",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": [
       1
@@ -4761,6 +4794,7 @@
     "language": "aramaic",
     "meaning": "teach/learn/state/present",
     "root": "תני",
+    "root-type": "verb",
     "type": "root",
     "weak-letters": [
       2
