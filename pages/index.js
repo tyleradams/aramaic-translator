@@ -1,5 +1,27 @@
 import React, {useState} from 'react'
 import Head from 'next/head'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Table from 'react-bootstrap/Table'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+import tableify from 'tableify';
+import parse from 'html-react-parser';
+import styled from 'styled-components';
+
+const renderRule = (rule, key) => {
+  return (
+    <tr>
+      <td>{rule.type}</td>
+      <td>{parse(tableify(rule[rule.type]))}</td>
+    </tr>
+    )
+      //# <td>{JSON.stringify(rule[rule.type])}</td>
+  JSON.stringify(rule);
+    const table = tableify({rule});
+    console.log(rule)
+    return parse(table);
+    return (<div dangerouslySetInnerHTML={{__html: table}} />)
+  }
 
 class Home extends React.Component {
   constructor(props) {
@@ -12,7 +34,6 @@ class Home extends React.Component {
     this.fetchResults = this.fetchResults.bind(this);
     this.inputTextChange = this.inputTextChange.bind(this);
     this.weakMatchChange = this.weakMatchChange.bind(this);
-    this.renderRule = this.renderRule.bind(this);
   }
 
   fetchResults() {
@@ -37,25 +58,26 @@ class Home extends React.Component {
     this.setState({inputText: e.target.value});
   }
 
-  renderRule(rule, key) {
-    if (typeof(rule[rule.type]) === "string") {
+  
+  render() {
+    const renderTranslation = (r, key) => {
       return (
-        <tr key={key}>
-          <td>{rule.type}</td>
-          <td>{rule[rule.type]}</td>
-        </tr>
-      )
-    } else {
-      return (
-        <tr key={key}>
-          <td>{rule.type}</td>
-          <td>{JSON.stringify(rule[rule.type])}</td>
-        </tr>
+        <Table striped bordered>
+          <tbody>
+            <tr><td>{r.word}</td></tr>
+            <tr>
+              <td>meaning</td>
+              <td>{r.root.meaning}</td>
+            </tr>
+            <tr>
+              <td>root-type</td>
+              <td>{r.root["root-type"]}</td>
+            </tr>
+            {r.rules.map(renderRule)}
+          </tbody>
+        </Table>
       )
     }
-  }
-
-  render() {
     return (
       <div className="container">
         <Head>
@@ -67,31 +89,24 @@ class Home extends React.Component {
           <h1 className="title">
             Translate Aramaic
           </h1>
-          <form>
-            <input type="text" value={this.state.inputText} onChange={this.inputTextChange} className="translation-input--text"/>
-            <input type="checkbox" value={this.state.weakMatch} onChange={this.weakMatchChange} className="translation-input--text"/>
-            <input type="button" value="Translate" className="translation-input--translate-button" onClick={this.fetchResults}/>
-          </form>
+          <div>
+            <div className="d-flex">
+              Word
+              <div>
+                <input type="text" value={this.state.inputText} onChange={this.inputTextChange} className="translation-input--text"/><br />
+              </div>
+            </div>
+            <div className="d-flex">
+              Weak Match
+              <div className="ml-4 text-right">
+                <input type="checkbox" value={this.state.weakMatch} onChange={this.weakMatchChange} className="float-right translation-input--text"/>
+              </div>
+            </div>
+            <Button value="Translate" className="translation-input--translate-button" onClick={this.fetchResults}>Translate</Button>
+          </div>
           <div className="translator-output--container">
-            {this.state.translationResults.map((r,i) => {
-              return (
-              <table key={i} className="table">
-                <thead>
-                  <tr><td>{r.word}</td></tr>
-                  <tr>
-                    <td>meaning</td>
-                    <td>{r.root.meaning}</td>
-                  </tr>
-                  <tr>
-                    <td>root-type</td>
-                    <td>{r.root["root-type"]}</td>
-                  </tr>
-                </thead>
-                <tbody>
-                  {r.rules.map(this.renderRule)}
-                </tbody>
-              </table>
-            )})}
+            Returned {this.state.translationResults.length} Results
+            {this.state.translationResults.map(renderTranslation)}
           </div>
 
 
@@ -123,6 +138,12 @@ class Home extends React.Component {
             display: flex;
             justify-content: center;
             align-items: center;
+          }
+          .text-right {
+            text-align: right;
+            }
+          .translation-input--text {
+            margin-left: 20px;
           }
 
           footer img {
