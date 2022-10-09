@@ -4,12 +4,18 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "server": "FLASK_APP=api/translator.py flask run",
     "build": "next build",
     "start": "next start"
   },
   "dependencies": {
+    "bootstrap": "^5.2.2",
+    "html-react-parser": "^3.0.4",
     "next": "^10.0.0",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-bootstrap": "^2.5.0",
+    "react-dom": "17.0.1",
+    "styled-components": "^5.3.6",
+    "tableify": "^1.1.1"
   }
 }
