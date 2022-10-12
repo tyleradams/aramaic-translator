@@ -53,7 +53,10 @@ class Home extends React.Component {
     const renderTranslation = (r, key) => (
         <Table striped bordered>
           <tbody>
-            <tr><td>{r.word}</td></tr>
+              <tr>
+                  <td>Full word</td>
+                  <td>{r.word}</td>
+              </tr>
             <tr>
               <td>meaning</td>
               <td>{r.root.meaning}</td>
