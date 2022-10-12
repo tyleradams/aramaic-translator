@@ -34,7 +34,7 @@ class Home extends React.Component {
         'Content-Type': 'application/json',
       },
     };
-    fetch('http://localhost:5000/api/translator', body).then((r) => r.json()).then((r) => {
+    fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/translator`, body).then((r) => r.json()).then((r) => {
       this.setState({ translationResults: r.words });
     });
   }
