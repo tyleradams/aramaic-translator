@@ -6,6 +6,7 @@ module.exports = {
   },
   extends: [
     'airbnb-base',
+    'plugin:react/recommended'
   ],
   parserOptions: {
     ecmaVersion: 11,
@@ -16,4 +17,10 @@ module.exports = {
   },
   rules: {
   },
+  settings: {
+    "import/core-modules": ["styled-jsx", "styled-jsx/css"]
+  },
+  plugins: [
+    "react", "react-hooks"
+  ]
 };
