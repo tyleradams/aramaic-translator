@@ -1,36 +1,28 @@
-import React, {useState} from 'react'
-import Head from 'next/head'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import Table from 'react-bootstrap/Table'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+import React, { useState } from 'react';
+import Head from 'next/head';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Table from 'react-bootstrap/Table';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 import tableify from 'tableify';
 import parse from 'html-react-parser';
 import styled from 'styled-components';
 
-const renderRule = (rule, key) => {
-  return (
+const renderRule = (rule, key) => (
     <tr>
       <td>{rule.type}</td>
       <td>{parse(tableify(rule[rule.type]))}</td>
     </tr>
-    )
-      //# <td>{JSON.stringify(rule[rule.type])}</td>
-  JSON.stringify(rule);
-    const table = tableify({rule});
-    console.log(rule)
-    return parse(table);
-    return (<div dangerouslySetInnerHTML={{__html: table}} />)
-  }
+);
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       translationResults: [],
-      inputText: "",
+      inputText: '',
       weakMatch: false,
-    }
+    };
     this.fetchResults = this.fetchResults.bind(this);
     this.inputTextChange = this.inputTextChange.bind(this);
     this.weakMatchChange = this.weakMatchChange.bind(this);
@@ -39,29 +31,26 @@ class Home extends React.Component {
   fetchResults() {
     const body = {
       method: 'POST',
-        body: JSON.stringify({ word: this.state.inputText, weak_match: this.state.weakMatch }),
+      body: JSON.stringify({ word: this.state.inputText, weak_match: this.state.weakMatch }),
       headers: {
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     };
-    fetch(`api/translator`, body).then(r => r.json()).then(r => {
-      this.setState({translationResults: r.words})
-      console.log(r.words)
-    })
+    fetch('http://localhost:5000/api/translator', body).then((r) => r.json()).then((r) => {
+      this.setState({ translationResults: r.words });
+    });
   }
 
   weakMatchChange(e) {
-    this.setState({weakMatch: !this.state.weakMatch});
+    this.setState({ weakMatch: !this.state.weakMatch });
   }
 
   inputTextChange(e) {
-    this.setState({inputText: e.target.value});
+    this.setState({ inputText: e.target.value });
   }
 
-  
   render() {
-    const renderTranslation = (r, key) => {
-      return (
+    const renderTranslation = (r, key) => (
         <Table striped bordered>
           <tbody>
             <tr><td>{r.word}</td></tr>
@@ -71,13 +60,12 @@ class Home extends React.Component {
             </tr>
             <tr>
               <td>root-type</td>
-              <td>{r.root["root-type"]}</td>
+              <td>{r.root['root-type']}</td>
             </tr>
             {r.rules.map(renderRule)}
           </tbody>
         </Table>
-      )
-    }
+    );
     return (
       <div className="container">
         <Head>
@@ -108,7 +96,6 @@ class Home extends React.Component {
             Returned {this.state.translationResults.length} Results
             {this.state.translationResults.map(renderTranslation)}
           </div>
-
 
         </main>
 
@@ -264,7 +251,7 @@ class Home extends React.Component {
           }
         `}</style>
       </div>
-    )
+    );
   }
 }
 export default Home;
