@@ -85,6 +85,10 @@ def apply_modification(word, modification):
     else:
         raise Exception("Modification type {} not implemented".format(modification["type"]))
 
+def fix_suffix(word):
+    if "type" in word.rules[2]["suffix"] and word.rules[2]["suffix"]["type"] == "None":
+        word.rules[2]["suffix"] = "None"
+    return word
 def word_rank(input_word):
     def noun_states_rank(noun_states):
         noun_states_rank = [
@@ -144,7 +148,7 @@ def word_rank(input_word):
     def suffixes_rank(suffixes):
         if len(suffixes) == 0:
             return 0
-        elif len(suffixes) == 1 and suffixes[0]["suffix"]["type"] == "None":
+        elif len(suffixes) == 1 and suffixes[0]["suffix"] == "None":
             return 1
         elif len(suffixes) == 1 and suffixes[0]["modifications"] == []:
             return 3
@@ -451,6 +455,7 @@ def generate_words(data, input_word, weak_match=False):
     else:
         words = [w for w in words if w.word() == input_word]
 
+    words = [fix_suffix(word) for word in words]
     words = sorted(words, key=word_rank(input_word))
     return words
 
