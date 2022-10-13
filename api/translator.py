@@ -459,16 +459,19 @@ def generate_words(data, input_word, weak_match=False):
     words = sorted(words, key=word_rank(input_word))
     return words
 
-@app.route('/', defaults={'path': ''}, methods=['GET', 'POST'])
-@app.route('/<path:path>', methods=['GET', 'POST'])
-def translate(path):
-    body = flask.request.get_json()
-    word = body["word"]
-    weak_match = body["weak_match"]
-    print(f"translate request {body}, {word}, {weak_match}")
+def translate(word, weak_match):
+    # print(f"translate request {word}, {weak_match}")
     out = {
         "word": word,
         "words": [w.as_dict() for w in generate_words(DATA, word, weak_match)],
     }
-    print(f"translate {word}, {weak_match}", json.dumps(out))
-    return json.dumps(out)
+    # print(f"translate {word}, {weak_match}", json.dumps(out))
+    return out
+
+@app.route('/', defaults={'path': ''}, methods=['GET', 'POST'])
+@app.route('/<path:path>', methods=['GET', 'POST'])
+def translate_route(path):
+    body = flask.request.get_json()
+    word = body["word"]
+    weak_match = body["weak_match"]
+    return json.dumps(translate(word, weak_match))
