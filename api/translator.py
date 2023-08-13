@@ -10,6 +10,7 @@ import flask_cors
 app = flask.Flask(__name__)
 flask_cors.CORS(app, supports_credentials=True, origins=[
     "http://localhost:3000",
+    "http://localhost:3001",
     "https://aramaic-translator.vercel.app/",
 ])
 
@@ -35,6 +36,9 @@ DEBUG = False
 DATA = []
 with open('api/data.json') as d:
     DATA = json.load(d)
+
+with open('api/jastrow-data.json') as d:
+    DATA += json.load(d)
 
 def finalize_word(word):
     if word[-1] in FINALIZEABLE_LETTERS:
