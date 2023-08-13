@@ -1,0 +1,6 @@
+#!/usr/bin/env python3
+
+import json
+import translator
+
+print(json.dumps(translator.translate("אזל", False), ensure_ascii=False))
