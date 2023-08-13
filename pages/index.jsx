@@ -56,6 +56,10 @@ class Home extends React.Component {
                   <td>{r.word}</td>
               </tr>
             <tr>
+              <td>language</td>
+              <td>{r.root.language}</td>
+            </tr>
+            <tr>
               <td>meaning</td>
               <td>{r.root.meaning}</td>
             </tr>

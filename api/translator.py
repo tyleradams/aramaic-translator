@@ -31,7 +31,7 @@ PASSIVE_SWAP_LETTERS = {
 
 DAGESHABLE_LETTERS = "שבגדוזטיךכלמנםףפצקרת"
 
-DEBUG = False
+DEBUG = True
 
 DATA = []
 with open('api/data.json') as d:
@@ -73,9 +73,9 @@ def apply_modification(word, modification):
             return word[0:l+1] + modification["string"] + word[l+1:]
     elif modification["type"] == "dagesh-reduce":
         l = modification["location"]
-        if word[l + 1] in PASSIVE_SWAP_LETTERS:
+        if l + 1 < len(word) and word[l + 1] in PASSIVE_SWAP_LETTERS:
             return word[0:l] + word[l+1] + PASSIVE_SWAP_LETTERS[word[l + 1]] + word[l+2:]
-        elif word[l + 1] in DAGESHABLE_LETTERS:
+        elif l + 1 < len(word) and word[l + 1] in DAGESHABLE_LETTERS:
             return word[0:l] + word[l+1:]
         else:
             return word
@@ -90,8 +90,12 @@ def apply_modification(word, modification):
         raise Exception("Modification type {} not implemented".format(modification["type"]))
 
 def fix_suffix(word):
-    if "type" in word.rules[2]["suffix"] and word.rules[2]["suffix"]["type"] == "None":
-        word.rules[2]["suffix"] = "None"
+    # fails on hebrew for now
+    try:
+        if "type" in word.rules[2]["suffix"] and word.rules[2]["suffix"]["type"] == "None":
+            word.rules[2]["suffix"] = "None"
+    except:
+        pass
     return word
 def word_rank(input_word):
     def noun_states_rank(noun_states):
@@ -115,6 +119,7 @@ def word_rank(input_word):
             "Active-Participle",
             "Passive-Participle",
             "Mis-Participle",
+            "Gerund",
         ]
         binyan_ranks = [
             "Simple",
@@ -340,7 +345,7 @@ def generate_nouns(data, input_word):
     if DEBUG:
         print("DEBUG:PRUNED:WORDS:NOUNS:CONSTRUCTS:{}".format(len(construct_words)))
 
-    possessive_pronouns = [i for i in data if i["type"] == "suffix" and i["suffix"]["type"] == "Possessive-Pronoun"]
+    possessive_pronouns = [i for i in data if i["type"] == "suffix" and type(i["suffix"]) == dict and i["suffix"]["type"] == "Possessive-Pronoun"]
     words += add_rules(construct_words, possessive_pronouns, input_word)
 
     if DEBUG:
@@ -441,6 +446,12 @@ def generate_names(data, input_word):
 
     return words
 
+def generate_hebrew_verbs(data, input_word):
+    raw_roots = [i for i in data if i["type"] == "root" and i["root-type"] == "verb"]
+    roots = flatten([generate_roots(root) for root in raw_roots])
+    words = [Word(root, []) for root in roots]
+    return words
+
 def generate_words(data, input_word, weak_match=False):
     aramaic_data = [d for d in data if d["language"] in ["aramaic", "unknown"]]
     hebrew_data = [d for d in data if d["language"] in ["hebrew", "unknown"]]
@@ -451,6 +462,7 @@ def generate_words(data, input_word, weak_match=False):
     words += generate_misc(aramaic_data, input_word)
     words += generate_names(aramaic_data, input_word)
 
+    words += generate_hebrew_verbs(hebrew_data, input_word)
     words += generate_nouns(hebrew_data, input_word)
     words += generate_misc(hebrew_data, input_word)
 
