@@ -15,11 +15,12 @@
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-react": "^7.31.10",
     "html-react-parser": "^3.0.4",
-    "next": "^12.1.0",
+    "next": "^12.3.4",
     "react": "18.0.0",
     "react-bootstrap": "^2.5.0",
     "react-dom": "18.0.0",
     "styled-components": "^5.3.6",
-    "tableify": "^1.1.1"
+    "tableify": "^1.1.1",
+    "yarn": "^1.22.21"
   }
 }
